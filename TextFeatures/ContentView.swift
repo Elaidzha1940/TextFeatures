@@ -12,23 +12,45 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var isTextVisible = false
+    
     var body: some View {
         
         VStack {
-           LinearGradient(
-            colors: [.gray, .white, .green],
-            startPoint: .bottomLeading,
-            endPoint: .bottomTrailing)
+            Spacer()
             
+            if isTextVisible {
+                LinearGradient(
+                    colors: [.gray, .white, .green],
+                    startPoint: .bottomLeading,
+                    endPoint: .bottomTrailing
+                )
+                .frame(height: 70)
+                .mask {
+                    Text("elid.ev")
+                        .font(.system(size: 80, weight: .bold, design: .serif))
+                }
+            }
+            Spacer()
+            
+            Button(action: {
+                isTextVisible.toggle()
+            }) {
+                Text(isTextVisible ? "Close" : "Open")
+                    .padding()
+                    .background(Color.gray.opacity(0.4).gradient)
+                    .foregroundColor(.white.opacity(0.5))
+                    .cornerRadius(50)
+            }
         }
-        .frame(height: 60)
-        .mask {
-            Text("elid.ev")
-                .font(.system(size: 90, weight: .bold, design: .serif))
+        .onAppear {
+            print("")
         }
         .preferredColorScheme(.dark)
     }
 }
+
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
